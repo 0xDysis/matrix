@@ -1,14 +1,35 @@
+window.onload = function() {
+    document.getElementById('rows1').addEventListener('change', function() {
+        createMatrixInputs('matrix1', this.value, document.getElementById('columns1').value);
+    });
+
+    document.getElementById('columns1').addEventListener('change', function() {
+        createMatrixInputs('matrix1', document.getElementById('rows1').value, this.value);
+    });
+
+    document.getElementById('rows2').addEventListener('change', function() {
+        createMatrixInputs('matrix2', this.value, document.getElementById('columns2').value);
+    });
+
+    document.getElementById('columns2').addEventListener('change', function() {
+        createMatrixInputs('matrix2', document.getElementById('rows2').value, this.value);
+    });
+
+    document.getElementById('randomize1').addEventListener('click', function() {
+        randomizeMatrix('matrix1');
+    });
+
+    document.getElementById('randomize2').addEventListener('click', function() {
+        randomizeMatrix('matrix2');
+    });
+};
+
 document.getElementById('submit').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
-    var rows1 = parseInt(document.getElementById('rows1').value);
-    var columns1 = parseInt(document.getElementById('columns1').value);
-    var rows2 = parseInt(document.getElementById('rows2').value);
-    var columns2 = parseInt(document.getElementById('columns2').value);
+    var matrix1 = readMatrix('matrix1');
+    var matrix2 = readMatrix('matrix2');
     var operation = document.getElementById('operation').value;
-
-    var matrix1 = createMatrix(rows1, columns1);
-    var matrix2 = createMatrix(rows2, columns2);
 
     displayMatrix(matrix1, 'matrixDisplay1');
     displayMatrix(matrix2, 'matrixDisplay2');
@@ -32,16 +53,48 @@ document.getElementById('submit').addEventListener('click', function(event) {
     displayMatrix(result, 'matrixDisplayResult');
 });
 
-function createMatrix(rows, columns) {
-    var matrix = [];
+function createMatrixInputs(matrixId, rows, columns) {
+    var matrixDiv = document.getElementById(matrixId);
+    matrixDiv.innerHTML = ''; // Clear the previous inputs
+
     for (var i = 0; i < rows; i++) {
-        var row = [];
+        var row = document.createElement('div');
         for (var j = 0; j < columns; j++) {
-            row.push(Math.floor(Math.random() * 10)); // Generate a random number between 0 and 9
+            var input = document.createElement('input');
+            input.type = 'number';
+            input.id = matrixId + '-' + i + '-' + j;
+            row.appendChild(input);
         }
-        matrix.push(row);
+        matrixDiv.appendChild(row);
     }
+}
+
+function readMatrix(matrixId) {
+    var matrix = [];
+    var inputs = document.getElementById(matrixId).getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        var coords = inputs[i].id.split('-');
+        var row = parseInt(coords[1]);
+        var column = parseInt(coords[2]);
+        var value = parseInt(inputs[i].value);
+
+        if (!matrix[row]) {
+            matrix[row] = [];
+        }
+
+        matrix[row][column] = value;
+    }
+
     return matrix;
+}
+
+function randomizeMatrix(matrixId) {
+    var inputs = document.getElementById(matrixId).getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = Math.floor(Math.random() * 10); // Generate a random number between 0 and 9
+    }
 }
 
 function displayMatrix(matrix, displayId) {
@@ -98,6 +151,7 @@ function multiplyMatrices(matrix1, matrix2) {
     }
     return result;
 }
+
 
 
 
