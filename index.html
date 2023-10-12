@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Operations</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <form id="matrixForm1">
+        <h2>Matrix 1</h2>
+        <label for="rows1">Number of Rows:</label>
+        <input type="number" id="rows1" name="rows1" min="1" required>
+        <label for="columns1">Number of Columns:</label>
+        <input type="number" id="columns1" name="columns1" min="1" required>
+    </form>
+    <form id="matrixForm2">
+        <h2>Matrix 2</h2>
+        <label for="rows2">Number of Rows:</label>
+        <input type="number" id="rows2" name="rows2" min="1" required>
+        <label for="columns2">Number of Columns:</label>
+        <input type="number" id="columns2" name="columns2" min="1" required>
+    </form>
+    <select id="operation">
+        <option value="add">Add</option>
+        <option value="subtract">Subtract</option>
+        <option value="multiply">Multiply</option>
+    </select>
+    <button id="submit">Submit</button>
+    <h2>Matrix 1</h2>
+    <div id="matrixDisplay1"></div>
+    <h2>Matrix 2</h2>
+    <div id="matrixDisplay2"></div>
+    <h2>Result</h2>
+    <div id="matrixDisplayResult"></div>
+    <script src="script.js"></script>
+</body>
+</html>
+

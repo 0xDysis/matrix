@@ -1,0 +1,30 @@
+body {
+    background: linear-gradient(to bottom, #000000, #434343);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+#matrixDisplay1, #matrixDisplay2, #matrixDisplayResult {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#matrixDisplay1 div, #matrixDisplay2 div, #matrixDisplayResult div {
+    display: flex;
+}
+
+#matrixDisplay1 span, #matrixDisplay2 span, #matrixDisplayResult span {
+    margin: 0 5px;
+}
